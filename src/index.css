@@ -14,3 +14,10 @@ html, body, #root {
   background-color: #060B13;
   color: #f8fafc;
 }
+
+/* Estilo do cursor do Typed.js */
+.typed-cursor {
+  color: #38BDF8;
+  font-weight: 300;
+  margin-left: 2px;
+}

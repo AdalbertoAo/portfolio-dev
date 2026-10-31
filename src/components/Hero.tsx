@@ -1,54 +1,81 @@
-import React from 'react';
-import { ArrowRight, Download, Cpu, UserCheck } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import Typed from 'typed.js';
+import { ArrowRight, Download, Cpu } from 'lucide-react';
 
 export const Hero: React.FC = () => {
+  const typedRef = useRef<HTMLSpanElement | null>(null);
+
+  useEffect(() => {
+    if (!typedRef.current) return;
+
+    const typed = new Typed(typedRef.current, {
+      strings: [
+        'rigor algorítmico.',
+        'a disciplina da 42.',
+        'visão de produto.',
+        'alta performance.'
+      ],
+      typeSpeed: 60,
+      backSpeed: 40,
+      backDelay: 2000,
+      loop: true,
+      showCursor: true,
+      cursorChar: '|',
+    });
+
+    return () => {
+      typed.destroy();
+    };
+  }, []);
+
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-brand-bg">
+    <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden bg-brand-bg">
       {/* Glow Radial de Fundo */}
-      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-blue/15 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-blue/15 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           {/* Lado Esquerdo: Texto & Apresentação */}
           <div className="lg:col-span-7">
             
             {/* Tag de Posicionamento */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-brand-card border border-brand-accent/20 text-brand-accent text-xs font-mono mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-brand-card border border-brand-accent/20 text-brand-accent text-xs font-mono mb-5">
               <Cpu size={14} />
               <span>Front-End Specialist & CS Fundamentals (42 Luanda)</span>
             </div>
 
-            {/* Título Principal */}
-            <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight mb-6">
+            {/* Título Principal Reduzido com Efeito Typed.js */}
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight leading-snug mb-5">
               Construo interfaces modernas e de alto impacto com{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-blue-400">
-                rigor algorítmico.
-              </span>
+              <span 
+                ref={typedRef}
+                className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-blue-400 font-mono"
+              />
             </h1>
 
             {/* Subtítulo */}
-            <p className="text-base md:text-lg text-brand-muted leading-relaxed mb-8 max-w-2xl">
+            <p className="text-sm md:text-base text-brand-muted leading-relaxed mb-6 max-w-xl">
               Desenvolvedor Front-End e Full-Stack focado no ecossistema React/Next.js. 
               Combino experiência em arquitetura Web orientada a resultados com a disciplina de baixo nível desenvolvida na 42.
             </p>
 
             {/* Ações (CTAs) */}
-            <div className="flex flex-wrap items-center gap-4 mb-12">
+            <div className="flex flex-wrap items-center gap-3 mb-10">
               <a
                 href="#projects"
-                className="px-6 py-3.5 rounded-lg bg-brand-accent text-brand-black font-semibold text-sm hover:bg-sky-300 transition-all flex items-center gap-2 shadow-lg shadow-brand-accent/10"
+                className="px-5 py-3 rounded-lg bg-brand-accent text-brand-black font-semibold text-xs hover:bg-sky-300 transition-all flex items-center gap-2 shadow-lg shadow-brand-accent/10 font-mono"
               >
                 Ver Estudos de Caso
-                <ArrowRight size={16} />
+                <ArrowRight size={15} />
               </a>
 
               <a
                 href="/cv.pdf"
                 download
-                className="px-6 py-3.5 rounded-lg bg-brand-card text-slate-200 border border-slate-800 font-semibold text-sm hover:border-brand-accent/50 transition-all flex items-center gap-2"
+                className="px-5 py-3 rounded-lg bg-brand-card text-slate-200 border border-slate-800 font-semibold text-xs hover:border-brand-accent/50 transition-all flex items-center gap-2 font-mono"
               >
-                <Download size={16} />
+                <Download size={15} />
                 Descarregar CV
               </a>
 
@@ -58,7 +85,7 @@ export const Hero: React.FC = () => {
                   href="https://github.com" 
                   target="_blank" 
                   rel="noreferrer" 
-                  className="p-3 bg-brand-card rounded-lg hover:text-white border border-slate-800 hover:border-brand-accent/30 transition-all flex items-center justify-center"
+                  className="p-2.5 bg-brand-card rounded-lg hover:text-white border border-slate-800 hover:border-brand-accent/30 transition-all flex items-center justify-center"
                   aria-label="GitHub"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -69,7 +96,7 @@ export const Hero: React.FC = () => {
                   href="https://linkedin.com" 
                   target="_blank" 
                   rel="noreferrer" 
-                  className="p-3 bg-brand-card rounded-lg hover:text-white border border-slate-800 hover:border-brand-accent/30 transition-all flex items-center justify-center"
+                  className="p-2.5 bg-brand-card rounded-lg hover:text-white border border-slate-800 hover:border-brand-accent/30 transition-all flex items-center justify-center"
                   aria-label="LinkedIn"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -80,22 +107,22 @@ export const Hero: React.FC = () => {
             </div>
 
             {/* Grelha de Métricas */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-6 border-t border-brand-card/60">
-              <div className="bg-brand-black/50 p-3.5 rounded-xl border border-brand-card/40">
-                <span className="text-xl md:text-2xl font-bold text-white font-mono block">+210%</span>
-                <span className="text-[11px] text-brand-muted">SEO Vianet</span>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-5 border-t border-brand-card/60">
+              <div className="bg-brand-black/50 p-3 rounded-xl border border-brand-card/40">
+                <span className="text-lg md:text-xl font-bold text-white font-mono block">+210%</span>
+                <span className="text-[10px] text-brand-muted">SEO Vianet</span>
               </div>
-              <div className="bg-brand-black/50 p-3.5 rounded-xl border border-brand-card/40">
-                <span className="text-xl md:text-2xl font-bold text-white font-mono block">-35%</span>
-                <span className="text-[11px] text-brand-muted">Perdas Doc.</span>
+              <div className="bg-brand-black/50 p-3 rounded-xl border border-brand-card/40">
+                <span className="text-lg md:text-xl font-bold text-white font-mono block">-35%</span>
+                <span className="text-[10px] text-brand-muted">Perdas Doc.</span>
               </div>
-              <div className="bg-brand-black/50 p-3.5 rounded-xl border border-brand-card/40">
-                <span className="text-xl md:text-2xl font-bold text-white font-mono block">42 Core</span>
-                <span className="text-[11px] text-brand-muted">C / C++ / Redes</span>
+              <div className="bg-brand-black/50 p-3 rounded-xl border border-brand-card/40">
+                <span className="text-lg md:text-xl font-bold text-white font-mono block">42 Core</span>
+                <span className="text-[10px] text-brand-muted">C / C++ / Redes</span>
               </div>
-              <div className="bg-brand-black/50 p-3.5 rounded-xl border border-brand-card/40">
-                <span className="text-xl md:text-2xl font-bold text-white font-mono block">+4 Turmas</span>
-                <span className="text-[11px] text-brand-muted">Formador Web</span>
+              <div className="bg-brand-black/50 p-3 rounded-xl border border-brand-card/40">
+                <span className="text-lg md:text-xl font-bold text-white font-mono block">+4 Turmas</span>
+                <span className="text-[10px] text-brand-muted">Formador Web</span>
               </div>
             </div>
 
@@ -103,48 +130,27 @@ export const Hero: React.FC = () => {
 
           {/* Lado Direito: Moldura da Fotografia */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative group w-full max-w-sm">
-              
-              {/* Efeito Neon de Borda e Glow */}
+            <div className="relative group w-full max-w-xs md:max-w-sm">
               <div className="absolute -inset-1 bg-gradient-to-r from-brand-accent to-brand-blue rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
-              
-              {/* Contentor da Fotografia */}
-              <div className="relative bg-brand-card border border-brand-card/80 rounded-2xl p-3 shadow-2xl">
-                
+              <div className="relative bg-brand-card border border-brand-card/80 rounded-2xl p-2.5 shadow-2xl">
                 <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-brand-black border border-brand-card/60 flex items-center justify-center">
-                  
-                  {/* Substituir src="/sua-foto.jpg" pela tua foto real na pasta public/ */}
                   <img 
                     src="/sua-foto.jpg" 
                     alt="Adalberto Silvestre" 
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
-                      // Fallback visual caso a imagem não exista ainda na pasta
                       e.currentTarget.style.display = 'none';
-                      e.currentTarget.parentElement!.classList.add('flex-col', 'gap-3');
                     }}
                   />
-                  
-                  {/* Placeholder exibido enquanto não adicionares a foto */}
-                  <div className="hidden text-center p-6 text-brand-muted font-mono text-xs">
-                    <UserCheck size={40} className="mx-auto text-brand-accent mb-2 opacity-80" />
-                    <span>Adiciona a tua fotografia em:</span>
-                    <code className="block text-slate-200 mt-1 bg-brand-card p-1 rounded">public/sua-foto.jpg</code>
-                  </div>
-
-                  {/* Badge Sobreposta */}
-                  <div className="absolute bottom-3 left-3 right-3 bg-brand-black/80 backdrop-blur-md p-3 rounded-lg border border-brand-card/80 flex items-center justify-between font-mono text-xs">
+                  <div className="absolute bottom-3 left-3 right-3 bg-brand-black/80 backdrop-blur-md p-2.5 rounded-lg border border-brand-card/80 flex items-center justify-between font-mono text-xs">
                     <div>
-                      <span className="text-white font-bold block">Adalberto Silvestre</span>
+                      <span className="text-white font-bold block text-xs">Adalberto Silvestre</span>
                       <span className="text-brand-accent text-[10px]">Luanda, Angola 🇦🇴</span>
                     </div>
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                   </div>
-
                 </div>
-
               </div>
-
             </div>
           </div>
 

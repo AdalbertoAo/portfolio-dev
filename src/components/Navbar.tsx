@@ -14,9 +14,7 @@ export const Navbar: React.FC = () => {
             <Terminal size={22} />
           </span>
           <span>adalberto<span className="text-brand-accent">.dev</span></span>
-          <span className="ml-2 px-2 py-0.5 text-[10px] bg-brand-card text-brand-accent rounded-full border border-brand-accent/20">
-            42 CORE
-          </span>
+          
         </a>
 
         {/* Desktop Nav */}
