@@ -1,46 +1,60 @@
-import React, { useState } from 'react';
-import { ExternalLink, Layers, ArrowUpRight, CheckCircle2, ChevronRight, Image as ImageIcon } from 'lucide-react';
+import React from 'react';
+import { ExternalLink, ChevronRight, Image as ImageIcon } from 'lucide-react';
+import { ReactIcon, NextIcon, TSIcon, TailwindIcon, NodeIcon, NestIcon, PostgresIcon } from './TechIcons';
 
-export const Projects: React.FC = () => {
-  // Estado para modal/detalhes simples
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+interface ProjectsProps {
+  onSelectProject: (project: any) => void;
+}
 
-  const caseStudies = [
-    {
-      id: "vianet",
-      badge: "EM PRODUÇÃO",
-      title: "Vianet — Gestão Documental & Remodelação Web",
-      subtitle: "Sistema de Otimização Operacional e SEO",
-      image: "/projects/vianet.jpg", // Coloca a imagem em public/projects/vianet.jpg
-      description: "Reformulação completa da arquitetura web da Vianet, focada em produtividade documental e indexação avançada nos motores de busca.",
-      details: "Este projeto envolveu o redesenho da interface de navegação, otimização técnica de velocidade de carregamento (Lighthouse Score > 90) e reestruturação da gestão de arquivos para evitar perdas de documentos na rotina diária das equipas operacionais.",
-      problem: "Perdas frequentes de arquivos operacionais e reduzida presença nos motores de busca.",
-      results: [
-        { label: "Tráfego Orgânico", value: "+210%" },
-        { label: "Perdas Doc.", value: "-35%" }
-      ],
-      stack: ["React", "Next.js", "Tailwind CSS", "TypeScript", "SEO"],
-      liveUrl: "https://vianet.ao", // Substituir pelo link real
-      githubUrl: "https://github.com/adalberto/vianet-remodel" // Substituir pelo teu repo
-    },
-    {
-      id: "transgest",
-      badge: "EM PRODUÇÃO",
-      title: "Transgest — Gestão de Frotas Escolares",
-      subtitle: "Plataforma Logística Full-Stack",
-      image: "/projects/transgest.jpg", // Coloca a imagem em public/projects/transgest.jpg
-      description: "Plataforma centralizada para controlo de transporte escolar, rotas em tempo real, gestão de motoristas e manutenção preventiva.",
-      details: "Desenvolvido com uma arquitetura moderna em Next.js no Front-End e NestJS no Back-End com PostgreSQL. Inclui testes automatizados em Jest e integração containerizada com Docker.",
-      problem: "Logística dispersa e falta de controlo centralizado de rotas e custos de manutenção de veículos.",
-      results: [
-        { label: "Testes", value: "Jest / Cobertura" },
-        { label: "Database", value: "PostgreSQL / Prisma" }
-      ],
-      stack: ["Next.js", "NestJS", "TypeScript", "PostgreSQL", "Prisma ORM", "Docker"],
-      liveUrl: "https://transgest.ao", // Substituir pelo link real
-      githubUrl: "https://github.com/adalberto/transgest-fleet" // Substituir pelo teu repo
-    }
-  ];
+export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
+const caseStudies = [
+  {
+    id: "vianet",
+    badge: "EM PRODUÇÃO",
+    title: "Vianet — Remodelação Web & Gestão Documental",
+    subtitle: "Sistema de Otimização Operacional e SEO",
+    image: "/projects/vianet-1.jpg",
+    // Lista com 3 fotos para o projeto Vianet
+    images: [
+      "/projects/vianet-1.jpg",
+      "/projects/vianet-2.jpg",
+      "/projects/vianet-3.jpg"
+    ],
+    description: "Reformulação completa da arquitetura web da Vianet, focada em produtividade documental e indexação avançada nos motores de busca.",
+    details: "Este projeto envolveu o redesenho da interface de navegação, otimização técnica de velocidade de carregamento (Lighthouse Score > 90) e reestruturação da gestão de arquivos para evitar perdas de documentos na rotina diária das equipas operacionais.",
+    problem: "Perdas frequentes de arquivos operacionais e reduzida presença nos motores de busca.",
+    results: [
+      { label: "Tráfego Orgânico", value: "+210%" },
+      { label: "Perdas Doc.", value: "-35%" }
+    ],
+    stack: ["React", "Next.js", "Tailwind CSS", "TypeScript", "SEO"],
+    liveUrl: "https://vianet.ao",
+    githubUrl: "https://github.com/adalberto/vianet-remodel"
+  },
+  {
+    id: "transgest",
+    badge: "EM PRODUÇÃO",
+    title: "Transgest — Gestão de Frotas Escolares",
+    subtitle: "Plataforma Logística Full-Stack",
+    image: "/projects/transgest-1.jpg",
+    // Lista com 3 fotos para o projeto Transgest
+    images: [
+      "/projects/transgest-1.jpg",
+      "/projects/transgest-2.jpg",
+      "/projects/transgest-3.jpg"
+    ],
+    description: "Plataforma centralizada para controlo de transporte escolar, rotas em tempo real, gestão de motoristas e manutenção preventiva.",
+    details: "Desenvolvido com uma arquitetura moderna em Next.js no Front-End e NestJS no Back-End com PostgreSQL. Inclui testes automatizados em Jest e integração containerizada com Docker.",
+    problem: "Logística dispersa e falta de controlo centralizado de rotas e custos de manutenção de veículos.",
+    results: [
+      { label: "Testes", value: "Jest / Cobertura" },
+      { label: "Database", value: "PostgreSQL / Prisma" }
+    ],
+    stack: ["Next.js", "NestJS", "TypeScript", "PostgreSQL", "Prisma ORM", "Docker"],
+    liveUrl: "https://transgest.ao",
+    githubUrl: "https://github.com/adalberto/transgest-fleet"
+  }
+];
 
   return (
     <section id="projects" className="py-24 bg-brand-bg relative">
@@ -59,7 +73,7 @@ export const Projects: React.FC = () => {
           </p>
         </div>
 
-        {/* Grelha de Projetos com Foto ao Lado */}
+        {/* Lista de Projetos */}
         <div className="space-y-12">
           {caseStudies.map((project) => (
             <article 
@@ -68,7 +82,7 @@ export const Projects: React.FC = () => {
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
                 
-                {/* Lado Esquerdo: Foto / Mockup do Projeto */}
+                {/* Captura do Projeto */}
                 <div className="lg:col-span-5 bg-brand-black relative min-h-[260px] lg:min-h-full overflow-hidden flex items-center justify-center group border-b lg:border-b-0 lg:border-r border-brand-card/60">
                   <img 
                     src={project.image} 
@@ -80,7 +94,6 @@ export const Projects: React.FC = () => {
                     }}
                   />
 
-                  {/* Fallback caso a imagem ainda não exista */}
                   <div className="hidden text-center text-brand-muted font-mono text-xs">
                     <ImageIcon size={36} className="mx-auto text-brand-accent mb-2 opacity-60" />
                     <span>Adiciona a captura em:</span>
@@ -89,14 +102,13 @@ export const Projects: React.FC = () => {
                     </code>
                   </div>
 
-                  {/* Badge de Produção */}
                   <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-brand-black/80 backdrop-blur-md text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                     {project.badge}
                   </span>
                 </div>
 
-                {/* Lado Direito: Informações do Projeto */}
+                {/* Informações do Projeto */}
                 <div className="lg:col-span-7 p-8 md:p-10 flex flex-col justify-between space-y-6">
                   
                   <div>
@@ -106,19 +118,20 @@ export const Projects: React.FC = () => {
                       {project.description}
                     </p>
 
-                    {/* Ícones e Badges da Stack Tecnológica */}
+                    {/* Stack com Ícones */}
                     <div className="flex flex-wrap gap-2 mb-6">
                       {project.stack.map((tech, idx) => (
                         <span 
                           key={idx}
-                          className="px-2.5 py-1 rounded-md bg-brand-black text-brand-accent font-mono text-xs border border-brand-card/80 flex items-center gap-1"
+                          className="px-2.5 py-1 rounded-md bg-brand-black text-brand-accent font-mono text-xs border border-brand-card/80 flex items-center gap-1.5"
                         >
-                          <span className="text-brand-accent/60">#</span>{tech}
+                          <ReactIcon size={12} />
+                          {tech}
                         </span>
                       ))}
                     </div>
 
-                    {/* Métricas / Resultados */}
+                    {/* Métricas */}
                     <div className="grid grid-cols-2 gap-3 pt-4 border-t border-brand-card/60">
                       {project.results.map((res, idx) => (
                         <div key={idx} className="bg-brand-black/50 p-3 rounded-lg border border-brand-card/60">
@@ -129,10 +142,9 @@ export const Projects: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Grupo de Ações (Botão Ver Mais, Git Repo e Ver Produção) */}
+                  {/* Ações */}
                   <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-brand-card/60">
                     
-                    {/* Botão Ver em Produção */}
                     <a
                       href={project.liveUrl}
                       target="_blank"
@@ -143,7 +155,6 @@ export const Projects: React.FC = () => {
                       Ver em Produção
                     </a>
 
-                    {/* Botão Repositório GitHub */}
                     <a
                       href={project.githubUrl}
                       target="_blank"
@@ -156,12 +167,12 @@ export const Projects: React.FC = () => {
                       Repositório Git
                     </a>
 
-                    {/* Botão Ver Mais (Detalhes) */}
+                    {/* Ver Mais (Abre a Página Dedicada) */}
                     <button
-                      onClick={() => setSelectedProject(project)}
-                      className="ml-auto px-3 py-2 rounded-lg text-brand-accent hover:bg-brand-card text-xs font-mono transition-colors flex items-center gap-1"
+                      onClick={() => onSelectProject(project)}
+                      className="ml-auto px-4 py-2.5 rounded-lg bg-brand-card hover:bg-brand-blue text-brand-accent hover:text-white border border-brand-card/80 text-xs font-mono transition-colors flex items-center gap-1.5"
                     >
-                      Ver Mais <ChevronRight size={14} />
+                      Ver Mais Detalhes <ChevronRight size={14} />
                     </button>
 
                   </div>
@@ -174,48 +185,6 @@ export const Projects: React.FC = () => {
         </div>
 
       </div>
-
-      {/* Modal Simples de Detalhes do Projeto */}
-      {selectedProject && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-6">
-          <div className="bg-brand-card border border-brand-accent/30 rounded-2xl max-w-xl w-full p-8 relative space-y-6">
-            <div className="flex items-center justify-between border-b border-brand-card pb-4">
-              <h3 className="text-xl font-bold text-white">{selectedProject.title}</h3>
-              <button 
-                onClick={() => setSelectedProject(null)}
-                className="text-brand-muted hover:text-white font-mono text-sm"
-              >
-                ✕ Fechar
-              </button>
-            </div>
-            <p className="text-brand-muted text-sm leading-relaxed">
-              {selectedProject.details}
-            </p>
-            <div className="bg-brand-black p-4 rounded-xl border border-brand-card text-xs text-slate-300">
-              <strong className="text-brand-accent block mb-1">Desafio Resolvido:</strong>
-              {selectedProject.problem}
-            </div>
-            <div className="flex justify-end gap-3 pt-2">
-              <a 
-                href={selectedProject.githubUrl} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="px-4 py-2 bg-brand-black text-xs font-mono rounded-lg border border-brand-card text-white hover:border-brand-accent/40"
-              >
-                Abrir GitHub
-              </a>
-              <a 
-                href={selectedProject.liveUrl} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="px-4 py-2 bg-brand-accent text-brand-black text-xs font-bold rounded-lg"
-              >
-                Visitar Produção
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };
