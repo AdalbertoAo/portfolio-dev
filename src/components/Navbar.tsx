@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Terminal, Code2, FolderGit2, Mail, Menu, X } from 'lucide-react';
+import { Terminal, Mail, Menu, X, ArrowRight } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +14,7 @@ export const Navbar: React.FC = () => {
             <Terminal size={22} />
           </span>
           <span>adalberto<span className="text-brand-accent">.dev</span></span>
-          <span className="ml-2 px-2 py-0.5 text-xs bg-brand-card text-brand-accent rounded-full border border-brand-accent/20">
+          <span className="ml-2 px-2 py-0.5 text-[10px] bg-brand-card text-brand-accent rounded-full border border-brand-accent/20">
             42 CORE
           </span>
         </a>
@@ -27,12 +27,15 @@ export const Navbar: React.FC = () => {
           <a href="#contact" className="hover:text-brand-accent transition-colors">// contacto</a>
         </nav>
 
-        {/* Status Indicator */}
-        <div className="hidden md:flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-black border border-brand-card text-xs text-slate-300">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            Disponível para Projetos
-          </div>
+        {/* CTA Botão Entre em Contacto */}
+        <div className="hidden md:flex items-center">
+          <a
+            href="#contact"
+            className="px-5 py-2.5 rounded-lg bg-brand-accent text-brand-black font-semibold text-xs hover:bg-sky-300 transition-all flex items-center gap-2 shadow-lg shadow-brand-accent/10 font-mono"
+          >
+            <Mail size={14} />
+            Entre em Contacto
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -51,6 +54,13 @@ export const Navbar: React.FC = () => {
           <a href="#projects" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-brand-accent">// projetos</a>
           <a href="#lab42" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-brand-accent">// 42_lab</a>
           <a href="#contact" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-brand-accent">// contacto</a>
+          <a 
+            href="#contact" 
+            onClick={() => setIsOpen(false)} 
+            className="mt-2 text-center py-3 bg-brand-accent text-brand-black font-bold rounded-lg"
+          >
+            Entre em Contacto
+          </a>
         </div>
       )}
     </header>

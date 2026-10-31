@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { AboutMe } from './components/AboutMe';
 import { ValueTriangle } from './components/ValueTriangle';
 import { Projects } from './components/Projects';
 import { Lab42 } from './components/Lab42';
@@ -12,6 +13,7 @@ export function App() {
       <Navbar />
       <main>
         <Hero />
+        <AboutMe />
         <ValueTriangle />
         <Projects />
         <Lab42 />
