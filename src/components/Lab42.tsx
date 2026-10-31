@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal, Play, RotateCcw, ExternalLink } from 'lucide-react';
 
 export const Lab42: React.FC = () => {
@@ -34,28 +35,27 @@ export const Lab42: React.FC = () => {
     setLogs(["// Stack A reinicializada."]);
   };
 
-  // Lista com links diretos para repositórios GitHub
   const coreProjects = [
     {
       name: "push_swap",
       tag: "ALGORITMOS DE ORDENAÇÃO",
       desc: "Ordenação de dados numa pilha com limite de instruções em C.",
       concepts: ["O(n log n)", "Gestão de Stacks", "Otimização"],
-      githubUrl: "https://github.com/adalberto/push_swap" // Substitui depois pelo teu link
+      githubUrl: "https://github.com/adalberto/push_swap"
     },
     {
       name: "Libft & ft_printf",
       tag: "BIBLIOTECA PADRÃO C",
       desc: "Reescrita da libc e implementação de formatação variádica de strings.",
       concepts: ["malloc", "Ponteiros", "Funções Variádicas"],
-      githubUrl: "https://github.com/adalberto/libft" // Substitui depois pelo teu link
+      githubUrl: "https://github.com/adalberto/libft"
     },
     {
       name: "get_next_line",
       tag: "GESTÃO DE BUFFERS",
       desc: "Leitura eficiente de linhas a partir de File Descriptors em C.",
       concepts: ["File Descriptors", "Variáveis Estáticas", "Buffers"],
-      githubUrl: "https://github.com/adalberto/get_next_line" // Substitui depois pelo teu link
+      githubUrl: "https://github.com/adalberto/get_next_line"
     }
   ];
 
@@ -78,7 +78,7 @@ export const Lab42: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Terminal / Simulador (Esquerda) */}
+          {/* Terminal / Simulador de Ordenação com Animada */}
           <div className="lg:col-span-7 bg-brand-black border border-brand-card rounded-2xl overflow-hidden shadow-2xl">
             <div className="bg-brand-card/80 px-4 py-3 border-b border-brand-card/60 flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -93,65 +93,84 @@ export const Lab42: React.FC = () => {
             <div className="p-6 font-mono text-sm space-y-6">
               <div>
                 <div className="flex items-center justify-between text-xs text-brand-muted mb-3">
-                  <span>STACK A (Estado Atual):</span>
+                  <span>STACK A (Animação Layout ID):</span>
                   <span>Movimentos: <strong className="text-brand-accent">{moves}</strong></span>
                 </div>
 
-                <div className="flex items-end gap-2 h-36 bg-brand-card/30 p-4 rounded-xl border border-brand-card/40 justify-center">
+                {/* Contentor com Reordenação Física Reativa */}
+                <div className="flex items-end gap-2 h-36 bg-brand-card/30 p-4 rounded-xl border border-brand-card/40 justify-center overflow-hidden">
                   {stackA.map((val, idx) => (
-                    <div key={idx} className="flex flex-col items-center gap-1 flex-1 max-w-[48px]">
+                    <motion.div 
+                      key={val}
+                      layout
+                      transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                      className="flex flex-col items-center gap-1 flex-1 max-w-[48px]"
+                    >
                       <span className="text-[10px] text-brand-accent font-mono">{val}</span>
                       <div 
                         className="w-full bg-gradient-to-t from-brand-blue to-brand-accent rounded-t-md transition-all duration-300"
                         style={{ height: `${(val / 100) * 80 + 10}px` }}
                       />
                       <span className="text-[9px] text-brand-muted">[{idx}]</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
 
               <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-brand-card/60">
-                <button
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
                   onClick={handleSwapA}
-                  className="px-3 py-1.5 rounded bg-brand-card hover:bg-brand-blue text-white text-xs border border-brand-card/80 transition-all font-mono flex items-center gap-1.5"
+                  className="px-3 py-1.5 rounded bg-brand-card hover:bg-brand-blue text-white text-xs border border-brand-card/80 transition-all font-mono flex items-center gap-1.5 cursor-pointer"
                 >
                   <Play size={12} className="text-brand-accent" />
                   sa (Swap A)
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
                   onClick={handleRotateA}
-                  className="px-3 py-1.5 rounded bg-brand-card hover:bg-brand-blue text-white text-xs border border-brand-card/80 transition-all font-mono flex items-center gap-1.5"
+                  className="px-3 py-1.5 rounded bg-brand-card hover:bg-brand-blue text-white text-xs border border-brand-card/80 transition-all font-mono flex items-center gap-1.5 cursor-pointer"
                 >
                   <Play size={12} className="text-brand-accent" />
                   ra (Rotate A)
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
                   onClick={handleReset}
-                  className="px-3 py-1.5 rounded bg-brand-black text-brand-muted hover:text-white text-xs border border-brand-card/80 transition-all font-mono ml-auto flex items-center gap-1.5"
+                  className="px-3 py-1.5 rounded bg-brand-black text-brand-muted hover:text-white text-xs border border-brand-card/80 transition-all font-mono ml-auto flex items-center gap-1.5 cursor-pointer"
                 >
                   <RotateCcw size={12} />
                   Reset
-                </button>
+                </motion.button>
               </div>
 
               <div className="bg-brand-bg/90 p-3 rounded-lg border border-brand-card/50 text-xs space-y-1 font-mono text-emerald-400/90">
-                {logs.map((log, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <span className="text-brand-muted">$</span>
-                    <span>{log}</span>
-                  </div>
-                ))}
+                <AnimatePresence>
+                  {logs.map((log, i) => (
+                    <motion.div 
+                      key={i + log}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0 }}
+                      className="flex items-start gap-2"
+                    >
+                      <span className="text-brand-muted">$</span>
+                      <span>{log}</span>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
               </div>
 
             </div>
           </div>
 
-          {/* Destaque dos Módulos com Botão para GitHub (Direita) */}
+          {/* Destaque dos Módulos em C */}
           <div className="lg:col-span-5 space-y-4">
             {coreProjects.map((proj, idx) => (
-              <div 
+              <motion.div 
                 key={idx}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.2 }}
                 className="bg-brand-card/40 border border-brand-card hover:border-brand-accent/30 rounded-xl p-6 transition-all duration-300 flex flex-col justify-between space-y-4"
               >
                 <div>
@@ -173,7 +192,6 @@ export const Lab42: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Botão de Redirecionamento ao GitHub do Projeto */}
                 <a
                   href={proj.githubUrl}
                   target="_blank"
@@ -187,7 +205,7 @@ export const Lab42: React.FC = () => {
                   <ExternalLink size={12} className="group-hover:translate-x-0.5 transition-transform" />
                 </a>
 
-              </div>
+              </motion.div>
             ))}
           </div>
 
