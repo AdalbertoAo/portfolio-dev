@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import AOS from 'aos';
+
+import { TechCursor } from './components/TechCursor';
+import { ParticlesBg } from './components/ParticlesBg';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutMe } from './components/AboutMe';
@@ -9,25 +13,36 @@ import { Projects } from './components/Projects';
 import { ProjectDetail } from './components/ProjectDetail';
 import { Lab42 } from './components/Lab42';
 import { Footer } from './components/Footer';
-import { ParticlesBg } from './components/ParticlesBg';
-import { SectionReveal } from './components/SectionReveal';
 
 export function App() {
   const [selectedProject, setSelectedProject] = useState<any>(null);
 
+  useEffect(() => {
+    // Inicialização do AOS (Animate On Scroll)
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-out-cubic',
+      offset: 80,
+    });
+  }, []);
+
   return (
-    <div className="min-h-screen bg-brand-bg text-slate-100 font-sans relative selection:bg-brand-accent selection:text-brand-black">
+    <div className="min-h-screen bg-brand-bg text-slate-100 font-sans relative selection:bg-brand-accent selection:text-brand-black overflow-x-hidden">
       
-      {/* 1. Fundo Dinâmico de Partículas Interativas */}
+      {/* Retículo e Cursor Cibernético HUD */}
+      <TechCursor />
+
+      {/* Fundo de Partículas Interativas em Canvas */}
       <ParticlesBg />
 
-      {/* 2. Navegação Fixa com Transparência Blur */}
+      {/* Navegação Fixa */}
       <Navbar />
 
-      {/* 3. Conteúdo Principal */}
       <main className="relative z-10">
         <AnimatePresence mode="wait">
           {selectedProject ? (
+            /* Vista Dedicada do Detalhe do Projeto */
             <motion.div
               key="project-detail"
               initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
@@ -41,6 +56,7 @@ export function App() {
               />
             </motion.div>
           ) : (
+            /* Vista Principal do Portfólio */
             <motion.div
               key="main-portfolio"
               initial={{ opacity: 0 }}
@@ -49,32 +65,31 @@ export function App() {
               transition={{ duration: 0.3 }}
             >
               <Hero />
-              
-              <SectionReveal>
+
+              <div data-aos="fade-up">
                 <AboutMe />
-              </SectionReveal>
+              </div>
 
-              <SectionReveal>
+              <div data-aos="fade-up" data-aos-delay="100">
                 <ValueTriangle />
-              </SectionReveal>
+              </div>
 
-              <SectionReveal>
+              <div data-aos="zoom-in-up" data-aos-delay="150">
                 <TechStack />
-              </SectionReveal>
+              </div>
 
-              <SectionReveal>
+              <div data-aos="fade-up" data-aos-delay="100">
                 <Projects onSelectProject={(project) => setSelectedProject(project)} />
-              </SectionReveal>
+              </div>
 
-              <SectionReveal>
+              <div data-aos="flip-up" data-aos-delay="150">
                 <Lab42 />
-              </SectionReveal>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
       </main>
 
-      {/* 4. Rodapé */}
       <Footer />
     </div>
   );

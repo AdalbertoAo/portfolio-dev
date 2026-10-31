@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "aos/dist/aos.css";
 
 @theme {
   --color-brand-bg: #060B13;
@@ -20,4 +21,30 @@ html, body, #root {
   color: #38BDF8;
   font-weight: 300;
   margin-left: 2px;
+}
+
+/* Efeito Glitch Futurista */
+@keyframes cyber-glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.hover-cyber-glitch:hover {
+  animation: cyber-glitch 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }

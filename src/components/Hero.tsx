@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import Typed from 'typed.js';
 import { ArrowRight, Download, Cpu } from 'lucide-react';
+import { GsapTextReveal } from './GsapTextReveal';
+import { TechTextScramble } from './TechTextScramble';
 
 export const Hero: React.FC = () => {
   const typedRef = useRef<HTMLSpanElement | null>(null);
@@ -36,35 +38,42 @@ export const Hero: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
-          {/* Lado Esquerdo: Texto & Apresentação */}
+          {/* Lado Esquerdo: Conteúdo & Apresentação */}
           <div className="lg:col-span-7">
-            
-            {/* Tag de Posicionamento */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-brand-card border border-brand-accent/20 text-brand-accent text-xs font-mono mb-5">
-              <Cpu size={14} />
-              <span>Front-End Specialist & CS Fundamentals (42 Luanda)</span>
+
+            {/* Título Reduzido com Animação GSAP + Typed.js */}
+            <div className="mb-5">
+              <GsapTextReveal 
+                text="Construo interfaces modernas e de alto impacto com"
+                className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight leading-snug"
+              />
+              <div className="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold">
+                <span 
+                  ref={typedRef}
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-sky-300 to-blue-400 font-mono"
+                />
+              </div>
             </div>
 
-            {/* Título Principal Reduzido com Efeito Typed.js */}
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight leading-snug mb-5">
-              Construo interfaces modernas e de alto impacto com{' '}
-              <span 
-                ref={typedRef}
-                className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-blue-400 font-mono"
-              />
-            </h1>
-
             {/* Subtítulo */}
-            <p className="text-sm md:text-base text-brand-muted leading-relaxed mb-6 max-w-xl">
+            <p 
+              data-aos="fade-up" 
+              data-aos-delay="200"
+              className="text-sm md:text-base text-brand-muted leading-relaxed mb-6 max-w-xl"
+            >
               Desenvolvedor Front-End e Full-Stack focado no ecossistema React/Next.js. 
               Combino experiência em arquitetura Web orientada a resultados com a disciplina de baixo nível desenvolvida na 42.
             </p>
 
             {/* Ações (CTAs) */}
-            <div className="flex flex-wrap items-center gap-3 mb-10">
+            <div 
+              data-aos="fade-up" 
+              data-aos-delay="300"
+              className="flex flex-wrap items-center gap-3 mb-10"
+            >
               <a
                 href="#projects"
-                className="px-5 py-3 rounded-lg bg-brand-accent text-brand-black font-semibold text-xs hover:bg-sky-300 transition-all flex items-center gap-2 shadow-lg shadow-brand-accent/10 font-mono"
+                className="px-5 py-3 rounded-lg bg-brand-accent text-brand-black font-semibold text-xs hover:bg-sky-300 transition-all flex items-center gap-2 shadow-lg shadow-brand-accent/10 font-mono cursor-pointer"
               >
                 Ver Estudos de Caso
                 <ArrowRight size={15} />
@@ -73,19 +82,19 @@ export const Hero: React.FC = () => {
               <a
                 href="/cv.pdf"
                 download
-                className="px-5 py-3 rounded-lg bg-brand-card text-slate-200 border border-slate-800 font-semibold text-xs hover:border-brand-accent/50 transition-all flex items-center gap-2 font-mono"
+                className="px-5 py-3 rounded-lg bg-brand-card text-slate-200 border border-slate-800 font-semibold text-xs hover:border-brand-accent/50 transition-all flex items-center gap-2 font-mono cursor-pointer"
               >
                 <Download size={15} />
                 Descarregar CV
               </a>
 
-              {/* Redes Sociais */}
+              {/* Ícones de Redes Sociais */}
               <div className="flex items-center gap-2 text-brand-muted">
                 <a 
                   href="https://github.com" 
                   target="_blank" 
                   rel="noreferrer" 
-                  className="p-2.5 bg-brand-card rounded-lg hover:text-white border border-slate-800 hover:border-brand-accent/30 transition-all flex items-center justify-center"
+                  className="p-2.5 bg-brand-card rounded-lg hover:text-white border border-slate-800 hover:border-brand-accent/30 transition-all flex items-center justify-center cursor-pointer"
                   aria-label="GitHub"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -96,7 +105,7 @@ export const Hero: React.FC = () => {
                   href="https://linkedin.com" 
                   target="_blank" 
                   rel="noreferrer" 
-                  className="p-2.5 bg-brand-card rounded-lg hover:text-white border border-slate-800 hover:border-brand-accent/30 transition-all flex items-center justify-center"
+                  className="p-2.5 bg-brand-card rounded-lg hover:text-white border border-slate-800 hover:border-brand-accent/30 transition-all flex items-center justify-center cursor-pointer"
                   aria-label="LinkedIn"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -106,8 +115,12 @@ export const Hero: React.FC = () => {
               </div>
             </div>
 
-            {/* Grelha de Métricas */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-5 border-t border-brand-card/60">
+            {/* Grelha de Métricas de Impacto */}
+            <div 
+              data-aos="fade-up" 
+              data-aos-delay="400"
+              className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-5 border-t border-brand-card/60"
+            >
               <div className="bg-brand-black/50 p-3 rounded-xl border border-brand-card/40">
                 <span className="text-lg md:text-xl font-bold text-white font-mono block">+210%</span>
                 <span className="text-[10px] text-brand-muted">SEO Vianet</span>
@@ -128,8 +141,12 @@ export const Hero: React.FC = () => {
 
           </div>
 
-          {/* Lado Direito: Moldura da Fotografia */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+          {/* Lado Direito: Moldura da Fotografia com Efeito Neon */}
+          <div 
+            data-aos="zoom-in" 
+            data-aos-delay="300"
+            className="lg:col-span-5 flex justify-center lg:justify-end"
+          >
             <div className="relative group w-full max-w-xs md:max-w-sm">
               <div className="absolute -inset-1 bg-gradient-to-r from-brand-accent to-brand-blue rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
               <div className="relative bg-brand-card border border-brand-card/80 rounded-2xl p-2.5 shadow-2xl">
